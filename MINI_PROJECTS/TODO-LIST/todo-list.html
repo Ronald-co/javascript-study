@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+  <title>Todo List</title>
+  <link rel="stylesheet" href="todo-list.css">
+</head>
+<body>
+
+  <p>Todo List</p>
+
+  <div class="todo-input-grid">
+  <input type="text" placeholder="Todo name" class="js-input name-input" onkeydown="enter(event);">
+
+  <input type="date" class="js-date date-input">
+
+  <button
+    onclick="addTodo()";
+   class="add-todo-button">Add</button>
+   </div>
+
+  <div class="js-todo todo-grid"></div>
+ 
+
+   <script>
+
+    const todo = [];
+
+    function addTodo() {
+      const inputElem = document.querySelector('.js-input');
+      const dateElem = document.querySelector('.js-date');
+      const inputTodo = inputElem.value;
+      const dateTodo = dateElem.value;
+      
+      todo.push({inputTodo, dateTodo});
+
+      inputElem.value = ' ';
+      dateElem.value = ' ';
+
+      renderList();
+      
+    }
+
+    function renderList() {
+      let todoList = '';
+      const outputElem = document.querySelector('.js-todo');
+      for (let i = 0; i < todo.length; i++) {
+       const todoObject = todo[i];
+       const { inputTodo, dateTodo } = todoObject;
+       const html = `
+         <div>${inputTodo}</div>
+         <div>${dateTodo}</div>
+         <button class = "delete-todo-button" onclick = "todo.splice(${i}, 1); renderList();">Delete</button>
+       `
+        todoList += html;
+      }
+      outputElem.innerHTML = todoList;
+    }
+
+    function enter(event) {
+      if (event.key === 'Enter') {
+        addTodo();
+      }
+    }
+
+   </script>
+</body>
+</html>

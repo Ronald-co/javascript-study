@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- <html lang="en"> -->
+<head>
+  <!-- <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <title>Temperature Regulation</title>
+</head>
+<body>
+  
+
+
+  <script>
+
+  let C = function convertToFahrenheit(celsius) {
+     console.log(((celsius*9/5) + 32) + 'F');
+  }
+
+  let F = function convertToCelsius(fahrenheit) {
+     console.log(((fahrenheit - 32) * 5/9) + 'C');
+    
+  }
+
+  function convertTemperature(degree, unit) {
+     if (unit === C) {
+      C(degree);
+     } else if (unit === F) {
+      F(degree);
+     }   
+  }
+
+  convertTemperature(77, F)
+  C(25);
+  F(77);
+
+  </script>
+</body>
+</html>

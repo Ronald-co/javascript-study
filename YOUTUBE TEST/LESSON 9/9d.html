@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+  <title>9d.htmk</title>
+</head>
+<body>
+
+  <input type="text" placeholder="Name" onkeydown="
+    enter(event);
+    ">
+  <button onclick="display() ">Submit</button>
+  <p class="js-paragraph"></p>
+
+  <script>
+    
+    function enter(event) {
+    if (event.key === 'Enter') {
+     display();
+   }
+    }
+
+    function display() {
+     let name = document.querySelector('input').value;
+
+     document.querySelector('.js-paragraph').innerHTML = `Your name is ${name}`;
+    }
+  
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+ body{
+     background-color: rgb(25, 25, 25);
+     font-family: Arial;
+     color: white;
+
+    }
+
+    .title{
+      font-size: 17px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .js-result{
+      padding-top: 10px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .moveIcon{
+      height: 26px;
+    }
+
+    .moveButton{
+      background-color: transparent;
+      width: 70px;
+      height: 70px;
+      border-color: white;
+      border-radius: 60px;
+      border-width: 2px;
+      border-style: solid;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+
+    .moveParagraph{
+      font-size: 10px;
+    }
+
+    .scoreParagraph{
+      padding-top: 27px;
+      font-size: 8px;
+    }
+
+    .resetButton{
+      font-size: 9px;
+      padding: 3px 9px;
+    }

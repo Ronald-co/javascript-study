@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<head>
+
+  <title>Calculator</title>
+
+
+  <style>
+    body{
+      background-color: black;
+    }
+
+    .input-button{
+      color: white;
+      background-color: rgba(184, 179, 179, 0.244);
+      font-size: 8px;
+      border: none;
+      border-radius: 100%;
+      height: 30px;
+      width: 30px;
+      font-family: Arial;
+      margin-right: 1px;
+    }
+
+    .calculation-button{
+      color: white;
+      background-color: rgb(218, 131, 8);
+      font-size: 8px;
+      border: none;
+      border-radius: 100%;
+      height: 30px;
+      width: 30px;
+      font-family: Arial;
+      margin-right: 3px;
+    }
+
+    .result{
+      color: white;
+      font-family: Arial;
+    }
+
+  </style>
+</head>
+<body>
+
+  <p class="js-paragraph result"></p>
+
+
+  <p>
+   <button onclick="updateCalculation(1);
+   " class="input-button">1</button>
+   <button onclick="updateCalculation(2);
+   " class="input-button">2</button>
+   <button onclick="updateCalculation(3);
+   " class="input-button">3</button>
+   <button onclick="updateCalculation('+');
+   " class="calculation-button">+</button>
+  </p>
+
+  <p>
+    <button onclick="updateCalculation(4);
+    " class="input-button">4</button>
+    <button onclick="updateCalculation(5);
+    " class="input-button">5</button>
+    <button onclick="updateCalculation(6);
+    " class="input-button">6</button>
+    <button onclick="updateCalculation('-');
+    " class="calculation-button">-</button>
+  </p>
+
+   <p>
+    <button onclick="updateCalculation(7);
+    " class="input-button">7</button>
+    <button onclick="updateCalculation(8);
+    " class="input-button">8</button>
+    <button onclick="updateCalculation(9);
+    " class="input-button">9</button>
+    <button onclick="updateCalculation('*');
+    " class="calculation-button">*</button>
+  </p>
+
+   <p>
+    <button onclick="updateCalculation(0);
+    " class="input-button">0</button>
+    <button onclick="updateCalculation('.');
+    " class="input-button">.</button>
+    <button onclick=" eval(calculation); calculation = eval(calculation); calculationElem.innerHTML= calculation;
+    localStorage.setItem('calculation',calculation);
+   " class="input-button">=</button>
+    <button onclick="updateCalculation('/');
+    " class="calculation-button">/</button>
+  </p>
+
+  <p>
+    <button onclick="calculation = ' ';
+    
+    
+      localStorage.setItem('calculation',calculation);
+      calculationElem.innerHTML= ' ';
+      
+    " class="input-button">Clear</button>
+  </p>
+  <script>
+    let calculation = localStorage.getItem('calculation') || '';
+
+    const calculationElem = document.querySelector('.js-paragraph');
+
+    calculationElem.innerHTML= calculation;
+
+    function updateCalculation(value) {
+      calculation+=value;
+      calculationElem.innerHTML= calculation;
+      
+      localStorage.setItem('calculation',calculation)
+    }
+
+  </script>
+</body>
+</html>

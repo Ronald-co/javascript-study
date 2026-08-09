@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+  <title>9a.html</title>
+
+  <style>
+
+    .cart-button{
+      border: none;
+      border-radius: 15px;
+      background-color: rgb(255,216,20);
+      padding: 3px 30px;
+      font-size: 10px;
+    }
+
+    .request-button{
+      border: none;
+      background-color: black;
+      color: white;
+      font-weight: bold;
+      font-family: Arial;
+      font-size: 8px;
+      padding: 5px 10px;
+      border-radius: 3px;
+    }
+
+    .later-button{
+      border: none;
+      background-color: rgb(230,230,230);
+      color: black;
+      font-weight: bold;
+      font-family: Arial;
+      font-size: 8px;
+      padding: 5px 10px;
+      border-radius: 3px;
+    }
+
+
+
+  </style>
+</head>
+<body>
+
+  <button class="cart-button">Add to Cart</button>
+
+  <p>
+
+    <button class="request-button">Request now</button>
+
+    <button class="later-button">Schedule for later</button>
+
+  </p>
+
+  <button class="js-button">Test</button>
+
+  <script>
+    console.log(document.querySelector('.js-button').classList.contains('js-button'));
+  </script>
+</body>
+</html>

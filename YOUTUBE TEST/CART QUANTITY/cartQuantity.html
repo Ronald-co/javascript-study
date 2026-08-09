@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!-- <html lang="en"> -->
+<head>
+  <!-- <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <title>Cart Quantity</title>
+</head>
+<body>
+<p>
+
+	<button
+	onclick="
+	  finalValue(1);
+	"
+	>Add to Cart</button>
+
+	<button
+	onclick="
+	  finalValue(2);
+	">+2</button>
+
+	<button
+	
+	onclick="
+	 finalValue(3);
+	"
+	>+3</button>
+  
+	
+	<button onclick=" 
+	  finalValue(4);
+	"
+	>+4</button>
+
+	
+	<button
+	onclick="
+	  finalValue(5);
+	"
+	>+5</button>
+
+</p>
+
+
+
+<p>
+	<button
+	onclick="
+	  finalSubValue(1);
+	">Remove from cart</button>
+
+		<button
+	onclick="
+	  finalSubValue(2);
+	">-2</button>
+
+		<button
+	onclick="
+	  finalSubValue(3)
+	">-3</button>
+</p>
+
+
+<button onclick="
+      cartQuantity = 0;
+      console.log('Cart was reset.');
+      outputElem.innerHTML = (`Cart quantity: ${cartQuantity}`);
+    ">Reset Cart</button>
+
+
+<p class="js-paragraph">Cart Quantity: 0</p>
+  <script>
+   let cartQuantity = 0;
+	
+	 
+	 
+  
+function add (a, b) {
+   return a + b;
+}
+	
+function sub(a, b) {
+	return a -b;
+}
+
+const outputElem = document.querySelector('.js-paragraph');
+
+function finalValue(value) {
+
+		if (cartQuantity === 10) {
+		outputElem.innerHTML = `Cart has ${cartQuantity} items. Cart full`;
+
+	}
+	 else if (add(cartQuantity , value) > 10 && add(cartQuantity , value) != 10) {
+		outputElem.innerHTML = `Cart almost full, cart has ${ 10 - cartQuantity} spaces left <br> Cart Quantity: ${cartQuantity}`;
+		
+	} else {
+		cartQuantity+=value;
+		outputElem.innerHTML =`Cart Quantity: ${cartQuantity}`;
+	}
+
+}
+
+
+
+function finalSubValue(value) {
+		if (cartQuantity === 0) {
+		outputElem.innerHTML= `Cart is empty`;
+		
+	}
+	 else if (sub(cartQuantity , value) < 0 && sub(cartQuantity , value) != 0) {
+		outputElem.innerHTML=` Not enough items in cart !!!  <br> Cart Quantity: ${cartQuantity}`;
+		
+	} else   {
+		cartQuantity-=value;
+		outputElem.innerHTML= `Cart Quantity: ${cartQuantity}`;
+	}
+
+}
+
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<head>
+  <title>10d.html</title>
+
+  <style>
+
+    .toggle-button{
+      border: none;
+      cursor: pointer;
+      font-family: Arial;
+      font-size: 10px;
+      padding: 6px 10px;
+    }
+
+    .is-toggled{
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: Arial;
+      font-size: 10px;
+      padding: 6px 10px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <button class="game-button toggle-button"
+    onclick="toggle('.game-button')">Gaming</button>
+
+  <button class="music-button toggle-button"
+    onclick="toggle('.music-button')">Music</button>
+
+  <button class="tech-button toggle-button"
+    onclick="toggle('.tech-button')">Tech</button>
+
+  
+
+  <script>
+
+    function toggle(givenClass) {
+
+      const on = document.querySelector(`${givenClass}`);
+      const check = document.querySelector('.is-toggled');
+
+      if (check) {
+        check.classList.remove('is-toggled');
+        // switchOn(givenClass);
+
+      } else {
+        (on.classList.contains('is-toggled'))? on.classList.remove('is-toggled') : on.classList.add('is-toggled');
+      }
+
+    }
+
+    function switchOn(givenClass) {
+       
+      const on = document.querySelector(`${givenClass}`);
+
+      (on.classList.contains('is-toggled'))? on.classList.remove('is-toggled') : on.classList.add('is-toggled');
+    }
+
+    
+  </script>
+</body>
+</html>

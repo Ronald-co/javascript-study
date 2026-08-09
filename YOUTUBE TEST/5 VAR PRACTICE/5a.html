@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- <html lang="en"> -->
+<head>
+  <!-- <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <title>Restaurant</title>
+</head>
+<body>
+
+  <p>Coffee</p>
+  <button onclick="coffee++">+1</button>
+  <button onclick="coffee+=2;  console.log(coffee);  console.log(cost); Cost(5, 4, 4)
+  
+  ">+2</button> 
+  <button onclick="coffee+=3">+3</button> 
+  <button onclick="coffee-=2">-2</button> 
+  <button onclick="coffee--">-1</button>
+
+  <p>Bagel</p>
+  <button>+1</button> 
+  <button>+2</button> 
+  <button>+3</button> 
+  <button>-2</button> 
+  <button>-1</button>
+
+  <p>Soup</p>
+  <button>+1</button> 
+  <button>+2</button> 
+  <button>+3</button> 
+  <button>-2</button> 
+  <button>-1</button>
+
+
+
+  <script>
+    let name = "Ro";
+    console.log(`My name is ${name}`);
+
+
+    let coffee = 0;
+    let bagel = 0;
+    let soup = 0;
+    
+    const coffeePrice = 5;
+    const bagelPrice = 3;
+    const soupPrice = 9;
+
+    let cost = (coffee * coffeePrice) + (bagel * bagelPrice) + (soup * soupPrice);
+    let result = `'Cost of food: $${cost}'`;
+    console.log(result);
+
+    let tax = 0.1 * cost;
+    let taxAmount = `'Tax(10%): $${tax}'`
+    console.log(taxAmount);
+
+    let totalCost = cost + tax;
+    let total = `'Total cost: $${totalCost}'`;
+    console.log(total);
+    
+    function Cost(coffee, bagel, soup) {
+
+     const coffeePrice = 5;
+     const bagelPrice = 3;
+     const soupPrice = 9;
+
+      let cost = (coffee * coffeePrice) + (bagel * bagelPrice) + (soup * soupPrice);
+      console.log(`'Cost of food: $${cost}'`);
+      ;
+    }
+    
+  </script>
+</body>
+</html>

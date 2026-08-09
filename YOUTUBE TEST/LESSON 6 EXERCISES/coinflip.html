@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<head>
+  
+  <title>Document</title>
+</head>
+<body>
+  
+
+  <button onclick=" playGame('Heads')">Heads</button>
+  <button onclick="playGame('Tails')">Tails</button>
+  <p class="js-paragraph"></p>
+
+  <script>
+
+    let final = '';
+    let paragraphElem = document.querySelector('.js-paragraph');
+
+    let score = JSON.parse(localStorage.getItem('score')) || {
+      wins: 0,
+      losses: 0
+    }
+
+		function playGame(guess) {
+    
+      const computerMove = compMove();
+      (computerMove === guess) ? final = 'You win': final ='You lose';
+
+      paragraphElem.innerHTML= `You picked: ${guess}`;
+
+      alert(`You picked ${guess}, Computer picked ${computerMove}. ${final}`)
+
+      console.log(computerMove);
+
+
+    if (final === 'You win') {
+      score.wins++;
+     } else {
+      score.losses++;
+     }
+
+
+     localStorage.setItem('score', JSON.stringify(score))
+
+    console.log(score);
+      
+    } 
+
+    function compMove() {
+      let number = Math.random();
+
+    return (number < 0.5) ? 'Heads' : 'Tails';
+    }
+
+  
+    
+
+    
+  </script>
+</body>
+</html>

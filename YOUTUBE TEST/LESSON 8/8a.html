@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+  <title>Objects</title>
+</head>
+<body>
+  
+
+  <script>
+
+    const product = {
+      name: 'basketball',
+      price: 2095
+    }
+
+    console.log(product.name);
+    console.log(product);
+    
+
+    product.price += 500;
+    console.log(product.price);
+
+    product['delivery-time'] = '3days'
+    console.log(product);
+    
+    let product2 = {
+      name: 'basketball',
+      price: '2095'
+    }
+ 
+    function comparePrice(value1, value2){
+
+      (value1.price < value2.price)
+      
+      ? console.log(`${value1.name} is cheaper. It costs ${value1.price}`) 
+
+      : console.log(`${value2.name} is cheaper. It costs ${value2.price}`);
+    }
+
+
+    function isSameProduct(value1, value2){
+
+      (value1.price === value2.price && value1.name === value2.name)
+      
+      ? console.log(`Same product`)
+
+      : console.log(`Different product`);
+    }
+
+
+    let value = 'GOOD MOrning'
+    console.log(value.toLowerCase());
+    console.log(value.repeat(2));
+    
+
+comparePrice(product2,product);
+isSameProduct(product2,product);
+
+  </script>
+</body>
+</html>
