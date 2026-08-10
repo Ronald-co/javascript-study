@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>11.html</title>
+  <title>12.html</title>
 
   <style>
 
@@ -8,28 +8,171 @@
 </head>
 <body>
 
-   <button class="js-button" onclick="change()">Done</button>
+   <!-- <button class="js-button" onclick="change()">Start</button> 
+   <button class="js-cart-button">Add to Cart</button> 
+   <p class="js-paragraph"></p> -->
+
+   <!-- <button class="js-add-button">Add</button>
+   <button class="js-remove-button">Remove</button> -->
  
   <script>
+ 
+   
+
+
+
+
+
+
+  
+   
+
+
+
+ 
+
     
+
+   
+
+
+
+  //12A
     const add = () => {
       console.log(2+3);
     }
 
+    //12B
     function runTwice(fun) {
       fun();
       fun();
     }
-
+    
     runTwice(add);
     runTwice(function () {console.log('12b');});
 
 
+    //12C
+    // function change() {
+    //   setTimeout(() => {
+    //     document.querySelector('.js-button').innerHTML= 'Finished!'
+    //   }, 1000)
+    // }
+
+
+   //12D
     function change() {
+      document.querySelector('.js-button').innerHTML= 'Loading...';
       setTimeout(() => {
         document.querySelector('.js-button').innerHTML= 'Finished!'
       }, 1000)
     }
+
+
+    //12E
+    function added() {
+      document.querySelector('.js-paragraph').innerHTML= 'Added';
+      setTimeout(() => {
+        document.querySelector('.js-paragraph').innerHTML= '';
+      }, 2000)
+    }
+
+
+    //12F 
+     function displayMessage() {
+
+      let timeout;
+      const addButtonElem = document.querySelector('.js-cart-button');
+      const paragraphElem = document.querySelector('.js-paragraph');
+
+      addButtonElem.addEventListener('click', () => {
+      paragraphElem.innerHTML = 'Added';
+
+      clearTimeout(timeout); 
+
+      timeout =  setTimeout(() => {
+         paragraphElem.innerHTML = '';
+        }, 2000)
+        })
+       }
+
+       displayMessage();
+
+
+    //12G
+    // function changeTitle(){
+    //   setInterval(() => {
+    //     (document.title === 'App') ? document.title= '(2) New messages' : document.title = 'App';
+    //   }, 1000);
+    // }
+
+    // changeTitle();
+
+
+    //12H and 12I
+
+    let messages = 0;
+
+    function messageCount() {
+       
+       const addElem = document.querySelector('.js-add-button');
+       const removeElem = document.querySelector('.js-remove-button');
+
+       addElem.addEventListener('click', () => {
+         messages++;
+       })
+        removeElem.addEventListener('click', () => {
+         (messages === 0)? messages=0 :messages--;
+       })
+    }
+    
+    function changeTitle(){
+
+     if (messages === 0) {
+      document.title = 'App'
+     } else {
+        (document.title === 'App') ? document.title= `(${messages}) New messages` : document.title = 'App';
+    }
+    }
+    messageCount();
+    setInterval(changeTitle, 1000);
+
+
+   //12J
+  //  const multiply = (num1, num2) => {
+  //    return num1 * num2;
+  //  }
+
+  //  console.log(multiply(90,3));
+
+
+   //12K
+   const multiply = (num1, num2) =>  num1 * num2;
+
+   
+   //12L
+   function countPositive(nums){
+    let count = 0;
+    nums.forEach((value) => {
+      if (value > 0) {
+        count++;
+      }
+    })
+    console.log(count);
+   }
+
+   //  countPositive([4,6,-9,-8,0,8])
+
+
+     //12M
+   function addNum(array,num) {
+    return array.map((value) => {
+     return value + num ;
+    });
+   }
+
+  //  console.log(addNum([1,2,3],5));
+
 
     
 
