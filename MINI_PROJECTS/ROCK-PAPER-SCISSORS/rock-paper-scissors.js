@@ -25,6 +25,10 @@
     }
 
     resetButton.addEventListener('click', () => {
+     resetParagraph.innerHTML= `Are you sure <button class= "deletechoice"> Yes </button> <button class= "forgetchoice"> No </button>`;
+
+     const agree = document.querySelector('.deletechoice');
+     const disagree = document.querySelector('.forgetchoice');
      reset();
     });
 
