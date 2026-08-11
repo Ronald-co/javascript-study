@@ -10,6 +10,70 @@
         losses: 0,
         ties: 0,
       };
+
+  function resetScore() {
+    const resetButton = document.querySelector('.js-reset-button');
+    const resetParagraph = document.querySelector('.js-reset-paragraph');
+
+    const reset = () => {
+     score.wins = 0;
+     score.losses = 0;
+     score.ties = 0;
+     localStorage.removeItem('score');
+    
+     scoreElem.innerHTML= `Wins: ${score.wins}  Losses: ${score.losses}  Ties: ${score.ties}`
+    }
+
+    resetButton.addEventListener('click', () => {
+     reset();
+    });
+
+    document.body.addEventListener('keydown', () => {
+      if (event.key === 'Backspace') {
+        reset();
+      }});
+
+  }
+  resetScore();
+
+  function autoPlay() {
+    const autoPlayButton = document.querySelector('.js-autoplay-button');
+    let timeout;
+
+    const play = () => {
+      clearInterval(timeout);
+      
+      timeout = setInterval(() => {
+        const playerMove = compMove();
+        gameMove(playerMove);
+      }, 1000);
+    }
+
+    const stop = () => {
+      clearInterval(timeout);
+      autoPlayButton.removeEventListener('click',play);
+    }
+
+    const requirement = () => {
+      if (autoPlayButton.innerHTML === 'Stop Playing') {
+      autoPlayButton.innerHTML='Auto Play';
+      stop();
+    } else {
+      autoPlayButton.innerHTML= 'Stop Playing';
+      play();
+    }}
+
+    document.body.addEventListener('keypress' , (event) => {
+      if (event.key === 'a') {
+      requirement();
+    }});
+
+    autoPlayButton.addEventListener('click', () => {
+      requirement();
+    }); 
+  }
+
+  autoPlay();
    
 
 
