@@ -15,30 +15,42 @@
     const resetButton = document.querySelector('.js-reset-button');
     const resetParagraph = document.querySelector('.js-reset-paragraph');
 
+
     const reset = () => {
      score.wins = 0;
      score.losses = 0;
      score.ties = 0;
      localStorage.removeItem('score');
-    
      scoreElem.innerHTML= `Wins: ${score.wins}  Losses: ${score.losses}  Ties: ${score.ties}`
     }
 
-    resetButton.addEventListener('click', () => {
-     resetParagraph.innerHTML= `Are you sure <button class= "deletechoice"> Yes </button> <button class= "forgetchoice"> No </button>`;
 
-     const agree = document.querySelector('.deletechoice');
-     const disagree = document.querySelector('.forgetchoice');
-     reset();
-    });
+    const resetText = () => {
+      resetParagraph.innerHTML= `Are you sure <button class= "deletechoice resetButton"> Yes </button> <button class= "forgetchoice resetButton"> No </button>`;
+      const agree = document.querySelector('.deletechoice');
+      const disagree = document.querySelector('.forgetchoice');
 
-    document.body.addEventListener('keydown', () => {
+      agree.addEventListener('click', () => {
+      reset();
+      resetParagraph.innerHTML=' ';
+      });
+
+      disagree.addEventListener('click', () => {
+      resetParagraph.innerHTML=' ';
+     });
+     }
+
+      resetButton.addEventListener('click', () => {
+      resetText();   
+      });
+
+      document.body.addEventListener('keydown', () => {
       if (event.key === 'Backspace') {
-        reset();
+        resetText();
       }});
-
   }
   resetScore();
+
 
   function autoPlay() {
     const autoPlayButton = document.querySelector('.js-autoplay-button');
@@ -76,7 +88,6 @@
       requirement();
     }); 
   }
-
   autoPlay();
    
 
@@ -123,8 +134,7 @@
 
 
    localStorage.setItem('score', JSON.stringify(score));
-  
-   
+
    moveElem.innerHTML= `You ${playerImage} ${computerImage} Computer`
   
    scoreElem.innerHTML= `Wins: ${score.wins}  Losses: ${score.losses}  Ties: ${score.ties}`

@@ -37,7 +37,8 @@
       font-size: 10px;
     }
 
-    .scoreParagraph{
+    .scoreParagraph,
+    .resetParagraph{
       padding-top: 27px;
       font-size: 8px;
     }
