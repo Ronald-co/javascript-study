@@ -9,14 +9,14 @@ export function addToCart(productId) {
             matchingItem = cartItem;
         }});
 
-        let addedValue = Number(selectorValue.value);
+        let quantity = Number(selectorValue.value);
         
         if (matchingItem) {
-          matchingItem.quantity+= addedValue;
+          matchingItem.quantity+= quantity;
         } else {
           cart.push({
-          productId: productId,
-          quantity: addedValue
+          productId,
+          quantity
          });         
        }
   }
