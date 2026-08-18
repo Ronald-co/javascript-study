@@ -47,3 +47,24 @@ export function removeFromCart(productId) {
 	localStorage.setItem('cart', JSON.stringify(cart));
 	container.remove();
 }
+
+export function updateQuantity(productId, newQuantity) {
+	const container = document.querySelector(`.js-container-${productId}`);
+	const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`)
+
+
+if (newQuantity > 0 && newQuantity < 100) {
+	cart.forEach((cartItem) => {
+		if (productId === cartItem.productId) {
+			cartItem.quantity = newQuantity;
+		}
+	});
+	quantityLabel.innerHTML = newQuantity;
+	
+	localStorage.setItem('cart', JSON.stringify(cart));
+	container.classList.remove('is-editing-quantity');
+}
+else {
+	console.log('error');
+}
+}
