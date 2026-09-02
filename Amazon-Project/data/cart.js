@@ -43,7 +43,6 @@ export function addToCart(productId) {
   
 export function removeFromCart(productId) {
 	let newCart = [];
-	const container = document.querySelector(`.js-container-${productId}`);
 	cart.forEach((cartItem) => {
 		let matchingItem;
 		if (productId !== cartItem.productId) {
@@ -52,7 +51,6 @@ export function removeFromCart(productId) {
 	})
 	cart = newCart;
 	saveToCart();
-	container.remove();
 }
 
 
@@ -70,7 +68,7 @@ export function updateQuantity(productId, newQuantity) {
 		});
 		quantityLabel.innerHTML = newQuantity;
 		
-		localStorage.setItem('cart', JSON.stringify(cart));
+		saveToCart();
 		container.classList.remove('is-editing-quantity');
 	}
 	else {

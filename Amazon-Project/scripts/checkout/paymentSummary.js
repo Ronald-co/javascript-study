@@ -10,9 +10,11 @@ import { formatCurrency } from "../utils/money.js"
 export function paymentSummary() {
 let itemPrice = 0;
 let shippingCost = 0;
+let quantity = 0;
 
   cart.forEach((cartItem) => {
     const productId = cartItem.productId;
+    quantity += cartItem.quantity
     let matchingItem;
     let shipping;
 
@@ -33,6 +35,7 @@ let shippingCost = 0;
   const totalBeforeTax = itemPrice + shippingCost;
   const estimatedTax = totalBeforeTax* 0.1;
   const orderTotal = totalBeforeTax + estimatedTax;
+  
     
   
   document.querySelector('.js-payment-summary')
@@ -42,7 +45,8 @@ let shippingCost = 0;
       </div>
 
       <div class="payment-summary-row">
-        <div>Items (3):</div>
+        <div class= "js-payment-items">
+        Items (${quantity}):</div>
         <div class="payment-summary-money">$${formatCurrency(itemPrice)}</div>
       </div>
 
