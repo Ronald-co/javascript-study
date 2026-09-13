@@ -57,8 +57,6 @@ export function removeFromCart(productId) {
 
 export function updateQuantity(productId, newQuantity) {
 	const container = document.querySelector(`.js-container-${productId}`);
-	const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`)
-
 
 	if (newQuantity > 0 && newQuantity < 100) {
 		cart.forEach((cartItem) => {
@@ -66,7 +64,6 @@ export function updateQuantity(productId, newQuantity) {
 				cartItem.quantity = newQuantity;
 			}
 		});
-		quantityLabel.innerHTML = newQuantity;
 		
 		saveToCart();
 		container.classList.remove('is-editing-quantity');

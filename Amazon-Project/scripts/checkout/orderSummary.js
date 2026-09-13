@@ -1,28 +1,24 @@
-import { cart, removeFromCart, updateDeliveryDate, updateQuantity } from "../../data/cart.js";
+// import { cart, removeFromCart, updateDeliveryDate, updateQuantity } from "../../data/cart.js";
 import { calculateDeliveryDate, deliveryOption } from "../../data/deliveryOption.js";
-import { products } from "../../data/products.js";
+import { getProducts, products } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { updateCartQuantity } from "../utils/quantity.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import { paymentSummary } from "./paymentSummary.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
+import { Cart } from "../../data/cart-class.js";
 
 
 export function renderOrderSummaryHTML() {
+  const cart = new Cart('cart');
   let checkoutDisplay = '';
   //Added an if else statement to fix display bug
-  if (!cart) {
+  if (!cart.cartItems) {
     checkoutDisplay = '';
   } else {
-    cart.forEach((cartItem) => {
+    cart.cartItems.forEach((cartItem) => {
     const productId = cartItem.productId;
-    let matchingItem;
-    
-    products.forEach((product) => {
-      if (productId === product.id) {
-        matchingItem = product;
-      } 
-    });
+    const matchingItem = getProducts(productId);
 
     const deliveryOptionId = cartItem.deliveryOptionId;
     let deliveryOptionn;
@@ -49,11 +45,11 @@ export function renderOrderSummaryHTML() {
               ${matchingItem.name}
             </div>
             <div class="product-price">
-              $${formatCurrency(matchingItem.priceCents)}
+              ${matchingItem.getPrice()}
             </div>
             <div class="product-quantity">
               <span>
-                Quantity: <span class="quantity-label js-quantity-label-${matchingItem.id}">${cartItem.quantity}</span>
+                Quantity: <span class="quantity-label">${cartItem.quantity}</span>
               </span>
               <span class="update-quantity-link link-primary js-update-link" data-product-id = ${matchingItem.id}>
                 Update
@@ -80,44 +76,12 @@ export function renderOrderSummaryHTML() {
     document.querySelector('.js-order-summary').innerHTML = checkoutDisplay;
   };
 
-  function deliveryOptionsHTML(productId, cartItem) {
-    let html = '';
-
-    deliveryOption.forEach((option) => { 
-      const priceString = option.priceCents === 0
-      ? 'FREE'
-      : `$${formatCurrency(option.priceCents)} -`
-      const isChecked = option.id === cartItem.deliveryOptionId;
-
-
-      html += 
-      `<div class="delivery-option js-delivery-button"
-        data-product-id = ${productId}
-        data-delivery-option-id = ${option.id}
-      >
-        <input type="radio" 
-          ${isChecked ? 'checked' : ''}
-          class="delivery-option-input"
-          name="delivery-option-1-${productId}">
-        <div>
-          <div class="delivery-option-date">
-            ${calculateDeliveryDate(option)}
-          </div>
-          <div class="delivery-option-price">
-            ${priceString} Shipping
-          </div>
-        </div>
-      </div>`
-  })
-  return html;
-  }
-
 
   const deleteLink = document.querySelectorAll('.js-delete-link');
   deleteLink.forEach((link) => {
     link.addEventListener('click', () => {
       const {productId} = link.dataset;
-      removeFromCart(productId);
+      cart.removeFromCart(productId);
       renderCheckoutHeader();
       renderOrderSummaryHTML();
       paymentSummary();
@@ -140,6 +104,7 @@ export function renderOrderSummaryHTML() {
   saveLink.forEach((link) => {
     link.addEventListener('click', () => {
       finalQuantityUpdate(link);
+      renderOrderSummaryHTML();
       paymentSummary();
     });
   })
@@ -150,6 +115,7 @@ export function renderOrderSummaryHTML() {
     ddd.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
         finalQuantityUpdate(ddd);
+        renderOrderSummaryHTML();
         paymentSummary();
       }
     })
@@ -160,7 +126,7 @@ export function renderOrderSummaryHTML() {
   deliveryButton.forEach((button) => {
     const{productId, deliveryOptionId} = button.dataset;
     button.addEventListener('click', () => {
-      updateDeliveryDate(productId, deliveryOptionId);
+      cart.updateDeliveryDate(productId, deliveryOptionId);
       renderOrderSummaryHTML();
       paymentSummary();
     })
@@ -169,11 +135,44 @@ export function renderOrderSummaryHTML() {
 
 
  function finalQuantityUpdate(elem) {
+  const cart = new Cart('cart');
   const {productId} = elem.dataset;
     const newQuantity = Number(document.querySelector(`.js-quantity-input-${productId}`).value);
-    updateQuantity(productId, newQuantity);
+    cart.updateQuantity(productId, newQuantity);
     renderCheckoutHeader();
  }
+
+ function deliveryOptionsHTML(productId, cartItem) {
+  let html = '';
+
+  deliveryOption.forEach((option) => { 
+    const priceString = option.priceCents === 0
+    ? 'FREE'
+    : `$${formatCurrency(option.priceCents)} -`
+    const isChecked = option.id === cartItem.deliveryOptionId;
+
+
+    html += 
+    `<div class="delivery-option js-delivery-button"
+      data-product-id = ${productId}
+      data-delivery-option-id = ${option.id}
+    >
+      <input type="radio" 
+        ${isChecked ? 'checked' : ''}
+        class="delivery-option-input"
+        name="delivery-option-1-${productId}">
+      <div>
+        <div class="delivery-option-date">
+          ${calculateDeliveryDate(option)}
+        </div>
+        <div class="delivery-option-price">
+          ${priceString} Shipping
+        </div>
+      </div>
+    </div>`
+});
+ return html;
+}
 
 
  
