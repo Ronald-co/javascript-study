@@ -9,7 +9,7 @@ export class Cart {
 
 
   #loadFromStorage () {
-    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey))
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));    
 
     if (!this.cartItems) {
       this.cartItems = [{
@@ -29,7 +29,9 @@ export class Cart {
   addToCart(productId) {
     let matchingItem;
     const selectorValue = document.querySelector(`.js-quantity-selector-${productId}`);
-    let quantity = Number(selectorValue.value);
+    // let quantity = Number(selectorValue.value);
+    //changed due to tests
+		let quantity = Number(selectorValue?.value) || 1;
 
     this.cartItems.forEach((cartItem) => {
       if (productId === cartItem.productId) {
@@ -98,7 +100,7 @@ export class Cart {
   }
 }
 
-// const cart = new Cart('cart-oop');
+export const cartt = new Cart('cart');
 // const businessCart = new Cart('cart-business');
 
 // console.log(cart);

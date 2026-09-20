@@ -1,18 +1,17 @@
-// import { cart } from "../../data/cart.js";
 import "../../data/cart-class.js";
 import { products } from "../../data/products.js";
 import { deliveryOption } from "../../data/deliveryOption.js"
 import { formatCurrency } from "../utils/money.js"
-import { Cart } from "../../data/cart-class.js";
+// import { Cart, cartt } from "../../data/cart-class.js";
 
 
 
 
-export function paymentSummary() {
+export function paymentSummary(cart) {
 let itemPrice = 0;
 let shippingCost = 0;
 let quantity = 0;
-const cart = new Cart('cart');
+// const cart = new Cart('cart');
 
   cart.cartItems.forEach((cartItem) => {
     const productId = cartItem.productId;

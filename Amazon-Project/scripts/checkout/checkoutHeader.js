@@ -1,6 +1,6 @@
 import { updateCartQuantity } from "../utils/quantity.js";
 
-export function renderCheckoutHeader() {
+export function renderCheckoutHeader(cart) {
 
   document.querySelector('.js-checkout-header')
    .innerHTML = `
@@ -9,7 +9,7 @@ export function renderCheckoutHeader() {
    `
 
   const quantityLink = document.querySelector('.js-quantity-link');
-  updateCartQuantity(quantityLink);
+  updateCartQuantity(quantityLink, cart);
   formatItem(quantityLink);
 }
 
