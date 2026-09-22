@@ -37,10 +37,22 @@ export function calculateDeliveryDate(deliveryOptionn) {
 
 
 function isWeekend (date){
-    const day = date.format('dddd');
-    if (day === 'Saturday' || day === 'Sunday') {
-       return true;
-    } 
-  }
+  const day = date.format('dddd');
+  if (day === 'Saturday' || day === 'Sunday') {
+      return true;
+  } 
+}
 
+
+
+export function validDeliveryOption(deliveryOptionId){
+  let valid = false;
+
+  deliveryOption.forEach((option) => {
+    if(option.id === deliveryOptionId){
+      valid = true;
+    }
+  });
+  return valid;
+}
  

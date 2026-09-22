@@ -3,8 +3,6 @@ import { getProducts, products } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { paymentSummary } from "./paymentSummary.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
-// import { Cart, cartt } from "../../data/cart-class.js";
-
 
 
 export function renderOrderSummaryHTML(cart) {
