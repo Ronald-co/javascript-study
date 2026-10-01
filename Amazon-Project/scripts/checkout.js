@@ -23,8 +23,23 @@ import { loadProductsFetch } from "../data/products.js";
 //   renderCheckoutHeader(cartt);
 // })
 
-loadProductsFetch().then(() => {
+async function loadPage () {
+  try{ 
+    await loadProductsFetch() 
+  } catch (error){
+    console.log('Unexpected error. Please try again later');
+    console.log(error);
+  }
+  
   renderOrderSummaryHTML(cartt);
   paymentSummary(cartt);
   renderCheckoutHeader(cartt);
-})
+}
+
+loadPage();
+
+// loadProductsFetch().then(() => {
+//   renderOrderSummaryHTML(cartt);
+//   paymentSummary(cartt);
+//   renderCheckoutHeader(cartt);
+// })

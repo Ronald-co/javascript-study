@@ -2,9 +2,15 @@ import { products,loadProductsFetch } from "../data/products.js";
 import { updateCartQuantity } from "./utils/quantity.js";
 import { Cart, cartt } from "../data/cart-class.js";
 
-loadProductsFetch().then(() => {
+async function loadPage(){
+  await loadProductsFetch();
   renderProductsGrid();
-})
+}
+loadPage();
+// loadProductsFetch().then(() => {
+//   renderProductsGrid();
+// })
+
 // loadProducts(renderProductsGrid); 
 
 function renderProductsGrid(){
