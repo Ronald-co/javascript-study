@@ -1,18 +1,20 @@
 import { formatCurrency } from "../scripts/utils/money.js";
 
+export let products = [];
+
 export function getProducts(productId) {
   let matchingItem;
-      
+       
   products.forEach((product) => {
     if (productId === product.id) {
       matchingItem = product;
     } 
-  });
+  });  
   return matchingItem;
 }
 
 
-class Product {
+export class Product {
   id;
   image;
   name;
@@ -41,7 +43,7 @@ class Product {
   }
 }
 
-class Clothing extends Product {
+export class Clothing extends Product {
   sizeChartLink;
 
   constructor(productDetails) {
@@ -51,12 +53,11 @@ class Clothing extends Product {
 
 
   extraInfoHTML() {
-    return `
-    <a href = ${this.sizeChartLink} target= "blank">Size Chart</a>`
+    return `<a href = ${this.sizeChartLink} target= "blank">Size Chart</a>`
   }
 }
 
-class Appliance extends Product {
+export class Appliance extends Product {
   instructionsLink;
   warrantyLink;
 
@@ -75,6 +76,47 @@ class Appliance extends Product {
 }
 
 
+
+
+// export function loadProducts(fun){
+//   const xhr = new XMLHttpRequest();
+
+//   xhr.addEventListener('load', () => {
+//      products = JSON.parse(xhr.response).map((productDetails) => {
+//       if (productDetails.type === 'clothing') {
+//         return new Clothing(productDetails);
+//       } else if (productDetails.type === 'appliance') {
+//         return new Appliance(productDetails);
+//       } else {
+//       return new Product(productDetails);
+//       }});
+//    console.log('load products');
+//    fun();
+//   })
+//     xhr.open('GET', 'https://supersimplebackend.dev/products');
+//     xhr.send();
+// }
+
+
+export function loadProductsFetch() {
+  const promise = fetch('https://supersimplebackend.dev/products').then((response) => {
+    return response.json();
+  }).then((productsData) => {
+    products = productsData.map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails);
+      } else if (productDetails.type === 'appliance') {
+        return new Appliance(productDetails);
+      } else {
+      return new Product(productDetails);
+      }});
+   console.log('load products');
+  })
+   return promise;
+}
+
+
+/*
 export const products = [
   {
     id: "id001",
@@ -764,5 +806,7 @@ export const products = [
   }
   return new Product(productDetails);
 });
+
+*/
 
 

@@ -1,10 +1,17 @@
 import { renderOrderSummaryHTML } from "../../scripts/checkout/orderSummary.js";
 import { Cart } from "../../data/cart-class.js";
+import {  loadProductsFetch } from "../../data/products.js";
 
 describe('test suite: renderOrderSummary', () => {
 
-  const productId1 = 'id001';
+  const productId1 = '54e0eccd-8f36-462b-b68a-8182611d9add';
   const productId2 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
+
+  beforeAll((done) => {
+   loadProductsFetch().then(() => {
+    done();
+   });
+  });
 
   beforeEach(() => {
     // spyOn(localStorage, 'setItem');
@@ -37,8 +44,8 @@ describe('test suite: renderOrderSummary', () => {
     expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(2);
     expect(document.querySelector(`.js-product-quantity-${productId1}`).innerText).toContain('Quantity: 2');
     expect(document.querySelector(`.js-product-quantity-${productId2}`).innerText).toContain('Quantity: 1');
-    expect(document.querySelector(`.js-name-${productId1}`).innerText).toEqual('Umbrella');
-    expect(document.querySelector(`.js-price-${productId1}`).innerText).toEqual('$2.00');
+    expect(document.querySelector(`.js-name-${productId1}`).innerText).toEqual('2 Slot Toaster - Black');
+    expect(document.querySelector(`.js-price-${productId1}`).innerText).toEqual('$18.99');
     });
 
 
@@ -79,6 +86,6 @@ describe('test suite: renderOrderSummary', () => {
     expect(cart.cartItems[0].productId).toEqual(productId1);
     expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
     expect(document.querySelector('.js-shipping-price-test').innerText).toEqual('$19.98');
-    expect(document.querySelector('.js-order-total-price-test').innerText).toEqual('$38.37');
+    expect(document.querySelector('.js-order-total-price-test').innerText).toEqual('$75.75');
   })
 })
