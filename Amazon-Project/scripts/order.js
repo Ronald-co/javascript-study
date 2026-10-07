@@ -1,6 +1,7 @@
 import { orders } from "../data/orders.js";
 import { getProducts, loadProductsFetch } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
+import { cartt } from "../data/cart-class.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 
 
@@ -12,12 +13,12 @@ async function loadPage () {
     console.log('Unexpected error. Please try again later');
     console.log(error);
   }
- renderOrdersHTML();
+ renderOrdersHTML(cartt);
 }
 
 loadPage();
 
-function renderOrdersHTML() {
+function renderOrdersHTML(cart) {
 
   let orderDisplay = '';
   
@@ -47,14 +48,15 @@ function renderOrdersHTML() {
         <div class="product-quantity">
           Quantity: ${product.quantity}
         </div>
-        <button class="buy-again-button button-primary">
+        <button class="buy-again-button button-primary js-buy-again-button"
+        data-product-id = ${productId}>
           <img class="buy-again-icon" src="images/icons/buy-again.png">
           <span class="buy-again-message">Buy it again</span>
         </button>
       </div>
 
       <div class="product-actions">
-        <a href="tracking.html">
+        <a href="tracking.html?orderId=${orderId}&productId=${productId}">
           <button class="track-package-button button-secondary">
             Track package
           </button>
@@ -91,6 +93,18 @@ function renderOrdersHTML() {
   `  
 })
     document.querySelector('.js-order-grid').innerHTML = orderDisplay;
+
+
+
+  document.querySelectorAll('.js-buy-again-button')
+    .forEach((button) => {
+      button.addEventListener('click', () => {
+        const {productId} = button.dataset;
+        cart.addToCart(productId);
+      })
+    })
+
+
 }
 
 
