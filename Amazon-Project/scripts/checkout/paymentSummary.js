@@ -93,6 +93,7 @@ let quantity = 0;
         });
         const order = await response.json();
         addOrder(order);
+        // localStorage.removeItem('cart');
         }
       catch(error){
         console.log('Unexpected error. Please try again later');

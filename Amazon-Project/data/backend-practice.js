@@ -1,10 +1,18 @@
-const xhr = new XMLHttpRequest();
+// const xhr = new XMLHttpRequest();
 
-xhr.addEventListener('load', () => {
-  console.lo(xhr.response);
-})
-xhr.open('GET', 'https://supersimplebackend.dev');
-xhr.send();
+// xhr.addEventListener('load', () => {
+//   console.log(xhr.response);
+// })
+// xhr.open('GET', 'https://supersimplebackend.dev');
+// xhr.send();
 // xhr.response
 
 //realms and runes
+
+
+
+// new Promise((resolve) => {
+// loadGreeting(() => {
+//    resolve();
+//   });
+// })

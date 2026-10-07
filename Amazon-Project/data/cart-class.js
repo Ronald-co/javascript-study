@@ -113,3 +113,10 @@ export const cartt = new Cart('cart');
 // console.log(cart);
 // console.log(businessCart);
 
+
+export async function loadCartFetch() {
+  const response = await fetch('https://supersimplebackend.dev/cart');
+  console.log( await response.text());
+}
+
+
