@@ -1,7 +1,8 @@
 import { orders } from "../data/orders.js";
-import { getProducts, loadProductsFetch } from "../data/products.js";
+import { getProduct, loadProductsFetch } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 import { cartt } from "../data/cart-class.js";
+import { updateCartQuantity } from "./utils/quantity.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 
 
@@ -29,7 +30,7 @@ function renderOrdersHTML(cart) {
   
    order.products.forEach((product) => {
     const productId = product.productId;
-    const matchingItem = getProducts(productId);
+    const matchingItem = getProduct(productId);
     let estimatedDeliveryTime = dayjs(product.estimatedDeliveryTime).format('dddd, MMMM D');
 
 
@@ -104,6 +105,9 @@ function renderOrdersHTML(cart) {
       })
     })
 
+
+  const cartQuantity = document.querySelector('.js-cart-quantity');
+  updateCartQuantity(cartQuantity, cartt);
 
 }
 

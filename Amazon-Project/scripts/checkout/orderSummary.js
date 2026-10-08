@@ -1,5 +1,5 @@
 import { calculateDeliveryDate, deliveryOption } from "../../data/deliveryOption.js";
-import { getProducts, products } from "../../data/products.js";
+import { getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { paymentSummary } from "./paymentSummary.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
@@ -13,7 +13,7 @@ export function renderOrderSummaryHTML(cart) {
   } else {
     cart.cartItems.forEach((cartItem) => {
     const productId = cartItem.productId;
-    const matchingItem = getProducts(productId);
+    const matchingItem = getProduct(productId);
     const deliveryOptionId = cartItem.deliveryOptionId;
     let deliveryOptionn;
     

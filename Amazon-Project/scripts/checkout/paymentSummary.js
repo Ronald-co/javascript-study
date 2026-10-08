@@ -1,5 +1,5 @@
 import "../../data/cart-class.js";
-import { products } from "../../data/products.js";
+import { getProduct } from "../../data/products.js";
 import { deliveryOption } from "../../data/deliveryOption.js"
 import { formatCurrency } from "../utils/money.js"
 import {cartt } from "../../data/cart-class.js";
@@ -17,14 +17,9 @@ let quantity = 0;
   cart.cartItems.forEach((cartItem) => {
     const productId = cartItem.productId;
     quantity += cartItem.quantity
-    let matchingItem;
+    const matchingItem = getProduct(productId);
     let shipping;
-
-    products.forEach((product) => {
-      if (productId === product.id) {
-        matchingItem = product;
-      } 
-    });
+    
     itemPrice += (cartItem.quantity*matchingItem.priceCents);
 
     deliveryOption.forEach((option) => {

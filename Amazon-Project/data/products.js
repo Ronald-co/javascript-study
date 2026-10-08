@@ -2,7 +2,7 @@ import { formatCurrency } from "../scripts/utils/money.js";
 
 export let products = [];
 
-export function getProducts(productId) {
+export function getProduct(productId) {
   let matchingItem;
        
   products.forEach((product) => {
