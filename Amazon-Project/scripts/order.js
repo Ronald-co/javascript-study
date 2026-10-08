@@ -92,23 +92,21 @@ function renderOrdersHTML(cart) {
       </div>
     </div>
   `  
-})
-    document.querySelector('.js-order-grid').innerHTML = orderDisplay;
+ })
+  document.querySelector('.js-order-grid').innerHTML = orderDisplay;
 
 
-
+  const cartQuantity = document.querySelector('.js-cart-quantity');
   document.querySelectorAll('.js-buy-again-button')
     .forEach((button) => {
       button.addEventListener('click', () => {
         const {productId} = button.dataset;
         cart.addToCart(productId);
+        updateCartQuantity(cartQuantity, cart);
       })
     })
-
-
-  const cartQuantity = document.querySelector('.js-cart-quantity');
-  updateCartQuantity(cartQuantity, cartt);
-
+  
+  updateCartQuantity(cartQuantity, cart);
 }
 
 
