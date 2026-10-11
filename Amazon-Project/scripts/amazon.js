@@ -7,15 +7,11 @@ async function loadPage(){
   renderProductsGrid();
 }
 loadPage();
-// loadProductsFetch().then(() => {
-//   renderProductsGrid();
-// })
 
-// loadProducts(renderProductsGrid); 
 
 function renderProductsGrid(){
   let productDisplay='';
-    products.forEach((product) => {
+    searchProducts().forEach((product) => {
       const html = `
         <div class="product-container">
         <div class="product-image-container">
@@ -75,33 +71,68 @@ function renderProductsGrid(){
     display.innerHTML= productDisplay;
     
 
-    const cartQuantity = document.querySelector('.js-cart-quantity');
-    updateCartQuantity(cartQuantity, cartt);
+  const cartQuantity = document.querySelector('.js-cart-quantity');
+  updateCartQuantity(cartQuantity, cartt);
 
-    const timeout = {};
-    function addedMessage(productId) {
-      const message = document.querySelector(`.js-added-message-${productId}`);
-      clearTimeout(timeout[productId]);
+  const timeout = {};
+  function addedMessage(productId) {
+    const message = document.querySelector(`.js-added-message-${productId}`);
+    clearTimeout(timeout[productId]);
 
-      message.classList.add('addedMessage');
-      timeout[productId] = setTimeout(() => {
-        message.classList.remove('addedMessage');
-      }, 2000);
-    }
+    message.classList.add('addedMessage');
+    timeout[productId] = setTimeout(() => {
+      message.classList.remove('addedMessage');
+    }, 2000);
+  }
 
 
 
-    
+  
 
-    const cartAddButton = document.querySelectorAll('.js-add-to-cart-button');
-      cartAddButton.forEach((button) => {
-        button.addEventListener('click', () => {
-        const {productId} = button.dataset;
-        cartt.addToCart(productId);
-        updateCartQuantity(cartQuantity, cartt);
-        addedMessage(productId);   
-      });
+  const cartAddButton = document.querySelectorAll('.js-add-to-cart-button');
+    cartAddButton.forEach((button) => {
+      button.addEventListener('click', () => {
+      const {productId} = button.dataset;
+      cartt.addToCart(productId);
+      updateCartQuantity(cartQuantity, cartt);
+      addedMessage(productId);   
     });
+  });
 
 
+  const searchButton = document.querySelector('.js-search-button');
+  searchButton.addEventListener('click', () => {
+    const searchValue = document.querySelector('.js-search-bar').value;
+    window.location.href = `amazon.html?search=${searchValue}`;
+  })
+
+  document.querySelector('.js-search-bar')
+    .addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+       const searchValue = document.querySelector('.js-search-bar').value;
+       window.location.href = `amazon.html?search=${searchValue}`;
+      }
+    })
+}
+
+function searchProducts () {
+  const url = new URL (window.location.href);
+  const searchValue = url.searchParams.get('search');
+  document.querySelector('.js-search-bar').value = searchValue;
+
+  if (!searchValue) {
+    return products;
+  } 
+
+   return products.filter((product) => {
+    let matchingKeyword = false;
+
+    const filteredProducts = product.name.toLowerCase().includes(searchValue.toLowerCase());
+    product.keywords.forEach((keyword) => {
+      if( keyword.toLowerCase().includes(searchValue.toLowerCase())) {
+        matchingKeyword = true;
+      };
+    });
+     return filteredProducts || matchingKeyword;
+  })
 }
